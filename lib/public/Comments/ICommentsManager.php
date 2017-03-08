@@ -116,6 +116,15 @@ interface ICommentsManager {
 
 	/**
 	 * @param $objectType string the object type, e.g. 'files'
+	 * @param int[] NodeIDs that may be returned
+	 * @param \OCP\IUser $user
+	 * @return \int[] hash table
+	 * @since 10.0.0
+	 */
+	public function getNumberOfUnreadCommentsForNodes($objectType, $objectIds, \OCP\IUser $user);
+
+	/**
+	 * @param $objectType string the object type, e.g. 'files'
 	 * @param $objectId string the id of the object
 	 * @param \DateTime $notOlderThan optional, timestamp of the oldest comments
 	 * that may be returned

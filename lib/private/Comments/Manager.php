@@ -371,6 +371,7 @@ class Manager implements ICommentsManager {
 	/**
 	 * @param $objectType string the object type, e.g. 'files'
 	 * @param int[] NodeIDs that may be returned
+	 * @param IUser $user
 	 * @return int[] hash table
 	 * @since 10.0.0
 	 */
