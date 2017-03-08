@@ -56,7 +56,7 @@ if (isset($_POST['action']) && isset($_POST['itemType']) && isset($_POST['itemSo
 			if($shareType === \OCP\Share::SHARE_TYPE_USER) {
 				$recipientList[] = $userManager->get($recipient);
 			} elseif ($shareType === \OCP\Share::SHARE_TYPE_GROUP) {
-				$recipientList = \OC_Group::usersInGroup($recipient);
+				$recipientList = \OC::$server->getGroupManager()->usersInGroup($recipient);
 				$group = \OC::$server->getGroupManager()->get($recipient);
 				$recipientList = $group->searchUsers('');
 			}
@@ -244,9 +244,9 @@ if (isset($_POST['action']) && isset($_POST['itemType']) && isset($_POST['itemSo
 			if (isset($_GET['search'])) {
 				$shareWithinGroupOnly = OC\Share\Share::shareWithGroupMembersOnly();
 				$shareWith = [];
-				$groups = OC_Group::getGroups((string)$_GET['search']);
+				$groups = \OC::$server->getGroupManager()->getGroups((string)$_GET['search']);
 				if ($shareWithinGroupOnly) {
-					$usergroups = OC_Group::getUserGroups(OC_User::getUser());
+					$usergroups = \OC::$server->getGroupManager()->getUserIdGroups(OC_User::getUser());
 					$groups = array_intersect($groups, $usergroups);
 				}
 
@@ -273,7 +273,7 @@ if (isset($_POST['action']) && isset($_POST['itemType']) && isset($_POST['itemSo
 				while ($count < $request_limit && count($users) == $limit) {
 					$limit = $request_limit - $count;
 					if ($shareWithinGroupOnly) {
-						$users = OC_Group::displayNamesInGroups($usergroups, (string)$_GET['search'], $limit, $offset);
+						$users = \OC::$server->getGroupManager()->displayNamesInGroups($usergroups, (string)$_GET['search'], $limit, $offset);
 					} else {
 						$users = OC_User::getDisplayNames((string)$_GET['search'], $limit, $offset);
 					}

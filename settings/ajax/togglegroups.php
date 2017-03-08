@@ -55,8 +55,8 @@ if(!OC_User::isAdminUser(OC_User::getUser())
 	exit();
 }
 
-if(!OC_Group::groupExists($group)) {
-	OC_Group::createGroup($group);
+if(!\OC::$server->getGroupManager()->groupExists($group)) {
+	\OC::$server->getGroupManager()->createGroup($group);
 }
 
 $l = \OC::$server->getL10N('settings');
@@ -65,14 +65,14 @@ $error = $l->t("Unable to add user to group %s", $group);
 $action = "add";
 
 // Toggle group
-if( OC_Group::inGroup( $username, $group )) {
+if( \OC::$server->getGroupManager()->inGroup( $username, $group )) {
 	$action = "remove";
 	$error = $l->t("Unable to remove user from group %s", $group);
-	$success = OC_Group::removeFromGroup( $username, $group );
-	$usersInGroup=OC_Group::usersInGroup($group);
+	$success = \OC::$server->getGroupManager()->removeFromGroup( $username, $group );
+	$usersInGroup=\OC::$server->getGroupManager()->usersInGroup($group);
 }
 else{
-	$success = OC_Group::addToGroup( $username, $group );
+	$success = \OC::$server->getGroupManager()->addToGroup( $username, $group );
 }
 
 // Return Success story

@@ -276,7 +276,7 @@ class Util {
 		} else {
 			$result = array_merge($result, $users);
 			foreach ($groups as $group) {
-				$result = array_merge($result, \OC_Group::usersInGroup($group));
+				$result = array_merge($result, \OC::$server->getGroupManager()->usersInGroup($group));
 			}
 		}
 
