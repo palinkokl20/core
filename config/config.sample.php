@@ -378,7 +378,7 @@ $CONFIG = array(
  * occ). The value should contain the full base URL:
  * ``https://www.example.com/owncloud``
  */
-'overwrite.cli.url' => '',
+'overwrite.cli.url' => 'https://www.kleincloud.sk/owncloud',
 
 /**
  * To have clean URLs without `/index.php` this parameter needs to be configured.
@@ -403,7 +403,7 @@ $CONFIG = array(
  * - `mod_rewrite` is installed
  * - `mod_env` is installed
  */
-'htaccess.RewriteBase' => '/',
+'htaccess.RewriteBase' => '/owncloud',
 
 /**
  * The URL of your proxy server, for example ``proxy.example.com:8081``.
